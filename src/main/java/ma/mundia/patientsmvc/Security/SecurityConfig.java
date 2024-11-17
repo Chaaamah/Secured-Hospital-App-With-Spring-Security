@@ -1,5 +1,7 @@
 package ma.mundia.patientsmvc.Security;
 
+import lombok.AllArgsConstructor;
+import ma.mundia.patientsmvc.Security.Services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,12 +20,14 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
+@AllArgsConstructor
 public class SecurityConfig {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    private UserDetailsServiceImpl userDetailsServiceImpl;
 
-    @Bean
+    //@Bean
     public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource){
         return new JdbcUserDetailsManager(dataSource);
     }
@@ -47,6 +51,9 @@ public class SecurityConfig {
         httpSecurity.exceptionHandling().accessDeniedPage("/notAuthorized");
 
         httpSecurity.authorizeHttpRequests().anyRequest().authenticated();
+
+        httpSecurity.userDetailsService(userDetailsServiceImpl);
+
         return httpSecurity.build();
     }
 

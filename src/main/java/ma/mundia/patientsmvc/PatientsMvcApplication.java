@@ -2,6 +2,7 @@ package ma.mundia.patientsmvc;
 
 import ma.mundia.patientsmvc.Entities.Patient;
 import ma.mundia.patientsmvc.Repository.PatientRepository;
+import ma.mundia.patientsmvc.Security.Services.AccountService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,7 +33,7 @@ public class PatientsMvcApplication {
         };
     }
 
-    @Bean
+    //@Bean
     CommandLineRunner commandLineRunner(JdbcUserDetailsManager jdbcUserDetailsManager){
         PasswordEncoder passwordEncoder = passwordEncoder();
         return args -> {
@@ -58,6 +59,20 @@ public class PatientsMvcApplication {
                         User.withUsername("admin1").password(passwordEncoder.encode("1234")).roles("USER", "ADMIN").build()
                 );
 
+        };
+    }
+
+    //@Bean
+    CommandLineRunner commandLineRunnerUserDetails(AccountService accountService){
+        return args -> {
+            accountService.addNewRole("USER");
+            accountService.addNewRole("ADMIN");
+
+            accountService.addNewUser("chaima", "1234", "chaima@gmail.com", "1234");
+            accountService.addNewUser("admin2", "1234", "admin2@gmail.com", "1234");
+
+            accountService.addRoleUser("chaima", "USER");
+            accountService.addRoleUser("admin2", "ADMIN");
         };
     }
 
