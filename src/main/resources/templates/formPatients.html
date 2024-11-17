@@ -15,26 +15,26 @@
             <h2 class="mt-3">Ajouter un patient</h2>
 
             <form method="post" th:action="@{save}">
-                <div>
+                <div class="mb-3 mt-3">
                     <label for="nom" class="mt-2">Nom</label>
                     <input id="nom" class="form-control" type="text" name="nom" th:value="${patient.nom}">
                     <span class="text-danger" th:errors="${patient.nom}"></span>
                 </div>
 
                 <div>
-                    <label class="mt-2">Date de naissance</label>
+                    <label class="mb-3">Date de naissance</label>
                     <input class="form-control" type="date" name="dateNaissance" th:value="${patient.dateNaissance}">
                     <span class="text-danger" th:errors="${patient.dateNaissance}"></span>
                 </div>
 
                 <div>
-                    <label class="mt-2">Malade</label>
+                    <label class="mb-3">Malade</label>
                     <input type="checkbox" name="malade" th:checked="${patient.malade}">
                     <span th:errors="${patient.malade}"></span>
                 </div>
 
                 <div>
-                    <label class="mt-2">Score</label>
+                    <label class="mb-3">Score</label>
                     <input class="form-control" type="text" name="score" th:value="${patient.score}">
                     <span class="text-danger" th:errors="${patient.score}"></span>
                 </div>
