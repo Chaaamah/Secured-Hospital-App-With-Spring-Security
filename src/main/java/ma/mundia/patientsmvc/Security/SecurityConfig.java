@@ -44,6 +44,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll();
 
+        httpSecurity.authorizeHttpRequests()
+                .requestMatchers("/webjars/", "/h2-console/").permitAll();
+
         httpSecurity.rememberMe();
 //        httpSecurity.authorizeHttpRequests().requestMatchers("/user/**").hasRole("USER"); //Authorisation
 //        httpSecurity.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN");

@@ -72,7 +72,7 @@ public class PatientController {
     public String save(Model model, @Valid Patient patient, BindingResult bindingResult, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "") String keyword){
         if (bindingResult.hasErrors()) return "formPatients";
         patientRepository.save(patient);
-        return "redirect:/index?page="+page+"&keyword="+keyword;
+        return "redirect:/user/index?page="+page+"&keyword="+keyword;
     }
 
     @GetMapping("/admin/editPatient")
@@ -84,7 +84,7 @@ public class PatientController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("page", page);
 
-        model.addAttribute("keywprd", keyword);
+        model.addAttribute("keyword", keyword);
         return "editPatient";
     }
 
